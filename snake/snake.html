@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>LOADERAW</title>
+<script type="text/javascript" src="snake.js"></script>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, #ede6e3, #b0b0b0, #7d82b8, #36382e);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  canvas {
+    border: 2px solid black;
+  }
+
+  .exit-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .exit-btn:hover {
+    background-color: #e04343;
+  }
+</style>
+</head>
+<body>
+<canvas id="viewport" width="640" height="480"></canvas>
+<button class="exit-btn" onclick="window.history.back();">Выйти</button>
+</body>
+</html>
