@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap'); /* Импорт шрифта 'Roboto Condensed' для текста */
+
+body {
+    --background-color: #ede6e3; /* Определение переменной для фона */
+    --wall-color: #36382e; /* Определение переменной для цвета стен */
+    --joystick-color: #210124; /* Определение переменной для цвета джойстика */
+    --joystick-head-color: #f06449; /* Определение переменной для цвета головы джойстика */
+    --ball-color: #f06449; /* Определение переменной для цвета мячика */
+    --end-color: #7d82b8; /* Определение переменной для цвета финиша */
+    --text-color: #210124; /* Определение переменной для текста */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Устанавливаем шрифт для текста */
+    background: linear-gradient(45deg, #ede6e3, #b0b0b0, #7d82b8, #36382e); /* Фоновый градиент */
+    background-size: 400% 400%; /* Размер фона */
+    animation: gradientAnimation 15s ease infinite; /* Анимация плавного изменения фона */
+}
+
+@keyframes gradientAnimation { /* Анимация для изменения фона */
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+html,
+body {
+    height: 100%; /* Устанавливает высоту на 100% экрана */
+    margin: 0; /* Убирает стандартные отступы */
+}
+
+#center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Центрирует содержимое на странице */
+}
+
+#game {
+    display: grid;
+    grid-template-columns: auto 150px; /* Устанавливает 2 колонки, с фиксированным размером второй */
+    grid-template-rows: 1fr auto 1fr; /* Устанавливает 3 строки */
+    gap: 30px; /* Промежуток между элементами */
+    perspective: 600px; /* Создает эффект перспективы для элементов внутри */
+}
+
+#maze {
+    position: relative;
+    grid-row: 1 / -1; /* Устанавливает элементы лабиринта на всю высоту */
+    grid-column: 1; /* Первый столбец */
+    width: 350px;
+    height: 315px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#end {
+    width: 65px;
+    height: 65px;
+    border: 5px dashed var(--end-color); /* С dashed-рамкой финишного элемента */
+    border-radius: 50%; /* Округлая форма финиша */
+}
+
+#joystick {
+    position: relative;
+    background-color: var(--joystick-color); /* Цвет джойстика */
+    border-radius: 50%; /* Округлая форма джойстика */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 50px;
+    grid-row: 2; /* Второй ряд */
+}
+
+#joystick-head {
+    position: relative;
+    background-color: var(--joystick-head-color); /* Цвет головы джойстика */
+    border-radius: 50%; /* Округлая форма головы */
+    width: 20px;
+    height: 20px;
+    cursor: grab; /* Изменяет курсор при наведении на голову */
+    animation-name: glow; /* Анимация для пульсации */
+    animation-duration: 0.6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-delay: 4s;
+}
+
+@keyframes glow { /* Анимация пульсации для головы джойстика */
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+.joystick-arrow:nth-of-type(1) { /* Стрелка для движения вниз */
+    position: absolute;
+    bottom: 55px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--joystick-color);
+}
+
+.joystick-arrow:nth-of-type(2) { /* Стрелка для движения вверх */
+    position: absolute;
+    top: 55px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--joystick-color);
+}
+
+.joystick-arrow:nth-of-type(3) { /* Стрелка для движения влево */
+    position: absolute;
+    left: 55px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--joystick-color);
+}
+
+.joystick-arrow:nth-of-type(4) { /* Стрелка для движения вправо */
+    position: absolute;
+    right: 55px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid var(--joystick-color);
+}
+
+#note {
+    grid-row: 3;
+    grid-column: 2; /* Третий ряд и второй столбец для заметки */
+    text-align: center;
+    font-size: 0.8em; /* Меньший размер шрифта */
+    color: var(--text-color); /* Цвет текста */
+    transition: opacity 2s; /* Плавное исчезновение */
+}
+
+a:visited {
+    color: inherit; /* Сохраняет цвет ссылок после их посещения */
+}
+
+.ball {
+    position: absolute;
+    margin-top: -5px;
+    margin-left: -5px;
+    border-radius: 50%; /* Круглая форма мячика */
+    background-color: var(--ball-color); /* Цвет мячика */
+    width: 10px;
+    height: 10px;
+}
+
+.wall {
+    position: absolute;
+    background-color: var(--wall-color); /* Цвет стены */
+    transform-origin: top center; /* Исходная точка для вращения */
+    margin-left: -5px;
+}
+
+.wall::before,
+.wall::after { /* Дополнительные круглые элементы для стен */
+    display: block;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: inherit;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.wall::before {
+    top: -5px; /* Верхняя точка */
+}
+
+.wall::after {
+    bottom: -5px; /* Нижняя точка */
+}
+
+.black-hole {
+    position: absolute;
+    margin-top: -9px;
+    margin-left: -9px;
+    border-radius: 50%;
+    background-color: black; /* Черная дыра */
+    width: 18px;
+    height: 18px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap'); 
+
+.exit-btn {
+    font-family: 'Roboto Condensed', sans-serif; /* Используем шрифт 'Roboto Condensed' */
+    font-size: 18px; /* Размер шрифта */
+    font-weight: 700; /* Жирность шрифта */
+    color: var(--text-color); /* Цвет текста, совпадающий с переменной для текста */
+    background-color: var(--ball-color); /* Фоновый цвет кнопки, совпадающий с цветом мячика */
+    border: 2px solid var(--joystick-head-color); /* Граница кнопки, совпадающая с цветом головы джойстика */
+    border-radius: 25px; /* Закругленные углы */
+    padding: 10px 20px; /* Внутренние отступы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Плавный переход для цвета и трансформации */
+}
+
+.exit-btn:hover {
+    background-color: var(--joystick-head-color); /* Изменение фона при наведении */
+    color: #ffffff; /* Изменение цвета текста при наведении */
+    transform: scale(1.05); /* Небольшое увеличение при наведении */
+}
+
+.exit-btn:active {
+    transform: scale(0.95); /* Небольшое уменьшение при клике */
+}
+
+

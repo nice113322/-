@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LOADERAW</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #exit-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px 20px;
+      background-color: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #exit-btn:hover {
+      background-color: #e04343;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer" style="position: absolute; top: 10px; left: 10px; font-size: 20px; color: white;"></div>
+  <div id="center">
+    <div id="game">
+      <div id="maze">
+        <div id="end"></div>
+      </div>
+      <div id="joystick">
+        <div class="joystick-arrow"></div>
+        <div class="joystick-arrow"></div>
+        <div class="joystick-arrow"></div>
+        <div class="joystick-arrow"></div>
+        <div id="joystick-head"></div>
+      </div>
+      <div id="note">
+        Нажмите на джостик, чтоб начать игру!
+        <p>Переместите каждый шар в центр. Готовы к сложному режиму? Нажмите "Р"</p> 
+      </div>
+    </div>
+  </div>
+
+  <!-- Exit Button -->
+  <button id="exit-btn" onclick="window.location.href='../index.html';">Выйти</button>
+
+  <script src="stik.js"></script>
+</body>
+</html>
